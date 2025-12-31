@@ -1395,6 +1395,234 @@
         }
       }
     },
+    "/api/customer-service/{id}": {
+      "get": {
+        "summary": "Get a customer service request by ID",
+        "tags": [
+          "Customer Service"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer service request details"
+          },
+          "404": {
+            "description": "Customer service request not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a customer service request",
+        "tags": [
+          "Customer Service"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Customer service request updated successfully"
+          },
+          "404": {
+            "description": "Customer service request not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a customer service request",
+        "tags": [
+          "Customer Service"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer service request deleted successfully"
+          },
+          "404": {
+            "description": "Customer service request not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/customer-service": {
+      "get": {
+        "summary": "Get all customer service requests",
+        "description": "Retrieve all customer service requests with optional filtering",
+        "tags": [
+          "Customer Service"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customer_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by customer ID"
+          },
+          {
+            "in": "query",
+            "name": "resolution_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by resolution status"
+          },
+          {
+            "in": "query",
+            "name": "priority_level",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by priority level"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of records to return (default 100)"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of records to skip (default 0)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of customer service requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new customer service request",
+        "description": "Create a new customer service request",
+        "tags": [
+          "Customer Service"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "customer_id",
+                  "issue_type",
+                  "issue_description",
+                  "priority_level",
+                  "communication_mode"
+                ],
+                "properties": {
+                  "customer_id": {
+                    "type": "string"
+                  },
+                  "issue_type": {
+                    "type": "string"
+                  },
+                  "issue_description": {
+                    "type": "string"
+                  },
+                  "assigned_agent": {
+                    "type": "string"
+                  },
+                  "priority_level": {
+                    "type": "string"
+                  },
+                  "communication_mode": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Customer service request created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/customers/{id}": {
       "get": {
         "summary": "Get customer by ID",

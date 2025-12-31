@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench, ClipboardList, Package, DollarSign, MessageSquare } from 'lucide-react';
+import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench, ClipboardList, Package, DollarSign, MessageSquare, Headphones } from 'lucide-react';
 
 export default function HomePage() {
   const router = useRouter();
@@ -143,6 +143,20 @@ export default function HomePage() {
             <h3 className="text-xl font-semibold mb-2">Communication</h3>
             <p className="text-gray-600">
               Manage customer communications and follow-ups. Track response status and communication channels.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <Headphones className="h-12 w-12 text-purple-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Customer Service</h3>
+            <p className="text-gray-600">
+              Track and resolve customer support requests. Manage priorities, assign agents, and monitor feedback.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <Users className="h-12 w-12 text-pink-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Customer Engagement</h3>
+            <p className="text-gray-600">
+              Manage customer interactions and campaigns. Track engagement outcomes, reward points, and follow-ups.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
