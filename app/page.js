@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench, ClipboardList, Package } from 'lucide-react';
+import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench, ClipboardList, Package, DollarSign } from 'lucide-react';
 
 export default function HomePage() {
   const router = useRouter();
@@ -115,6 +115,20 @@ export default function HomePage() {
             <h3 className="text-xl font-semibold mb-2">Parts Orders</h3>
             <p className="text-gray-600">
               Manage parts procurement and orders. Track delivery status, payments, and supplier relationships.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <DollarSign className="h-12 w-12 text-emerald-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Accounting</h3>
+            <p className="text-gray-600">
+              Track financial transactions, debits, credits, and payment processing. Complete audit trail.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <Shield className="h-12 w-12 text-blue-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Compliance</h3>
+            <p className="text-gray-600">
+              Manage regulatory compliance, audits, and documentation. Track deadlines and responsible parties.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">

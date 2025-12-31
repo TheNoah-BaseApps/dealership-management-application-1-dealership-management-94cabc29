@@ -30,6 +30,242 @@
   },
   "security": [],
   "paths": {
+    "/api/accounting/{id}": {
+      "get": {
+        "summary": "Get a single accounting transaction",
+        "description": "Retrieve a specific accounting transaction by ID",
+        "tags": [
+          "Accounting"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Transaction ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction details"
+          },
+          "404": {
+            "description": "Transaction not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an accounting transaction",
+        "description": "Update an existing accounting transaction",
+        "tags": [
+          "Accounting"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction updated successfully"
+          },
+          "404": {
+            "description": "Transaction not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an accounting transaction",
+        "description": "Delete an accounting transaction by ID",
+        "tags": [
+          "Accounting"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction deleted successfully"
+          },
+          "404": {
+            "description": "Transaction not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/accounting": {
+      "get": {
+        "summary": "Get all accounting transactions",
+        "description": "Retrieve all accounting transactions with optional filtering and pagination",
+        "tags": [
+          "Accounting"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Maximum number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          },
+          {
+            "in": "query",
+            "name": "transaction_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by transaction status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of accounting transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new accounting transaction",
+        "description": "Create a new accounting transaction record",
+        "tags": [
+          "Accounting"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "accounting_id",
+                  "transaction_date",
+                  "transaction_type",
+                  "account_name",
+                  "payment_method",
+                  "transaction_status"
+                ],
+                "properties": {
+                  "accounting_id": {
+                    "type": "string"
+                  },
+                  "transaction_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "transaction_type": {
+                    "type": "string"
+                  },
+                  "account_name": {
+                    "type": "string"
+                  },
+                  "debit_amount": {
+                    "type": "number"
+                  },
+                  "credit_amount": {
+                    "type": "number"
+                  },
+                  "payment_method": {
+                    "type": "string"
+                  },
+                  "reference_id": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "transaction_status": {
+                    "type": "string"
+                  },
+                  "processed_by": {
+                    "type": "string"
+                  },
+                  "approval_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transaction created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/analytics/dashboard": {
       "get": {
         "summary": "Get dashboard metrics",
@@ -155,6 +391,249 @@
           },
           "400": {
             "description": "Invalid input or email already exists"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/compliance/{id}": {
+      "get": {
+        "summary": "Get a single compliance record",
+        "description": "Retrieve a specific compliance record by ID",
+        "tags": [
+          "Compliance"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Compliance record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Compliance record details"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a compliance record",
+        "description": "Update an existing compliance record",
+        "tags": [
+          "Compliance"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Record updated successfully"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a compliance record",
+        "description": "Delete a compliance record by ID",
+        "tags": [
+          "Compliance"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Record deleted successfully"
+          },
+          "404": {
+            "description": "Record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/compliance": {
+      "get": {
+        "summary": "Get all compliance records",
+        "description": "Retrieve all compliance records with optional filtering and pagination",
+        "tags": [
+          "Compliance"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Maximum number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          },
+          {
+            "in": "query",
+            "name": "compliance_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by compliance status"
+          },
+          {
+            "in": "query",
+            "name": "department",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by department"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of compliance records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new compliance record",
+        "description": "Create a new compliance tracking record",
+        "tags": [
+          "Compliance"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "compliance_id",
+                  "compliance_type",
+                  "applicable_regulation",
+                  "effective_date",
+                  "due_date",
+                  "responsible_person",
+                  "compliance_status",
+                  "department"
+                ],
+                "properties": {
+                  "compliance_id": {
+                    "type": "string"
+                  },
+                  "compliance_type": {
+                    "type": "string"
+                  },
+                  "applicable_regulation": {
+                    "type": "string"
+                  },
+                  "effective_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "due_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "responsible_person": {
+                    "type": "string"
+                  },
+                  "compliance_status": {
+                    "type": "string"
+                  },
+                  "documentation_link": {
+                    "type": "string"
+                  },
+                  "audit_trail_id": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Compliance record created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
           },
           "500": {
             "description": "Server error"

@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Home, Users, DollarSign, Car, TrendingUp, Settings, UserCircle, ClipboardList, MessageSquare, Package, Calendar, Wrench, ShoppingCart } from 'lucide-react';
+import { Home, Users, DollarSign, Car, TrendingUp, Settings, UserCircle, ClipboardList, MessageSquare, Package, Calendar, Wrench, ShoppingCart, Shield } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Sidebar({ isOpen, currentPath, userRole }) {
@@ -19,6 +19,8 @@ export default function Sidebar({ isOpen, currentPath, userRole }) {
     { name: 'Service History', href: '/service-history', icon: ClipboardList, roles: ['admin', 'manager', 'service'] },
     { name: 'Parts Inventory', href: '/parts-inventory', icon: Package, roles: ['admin', 'manager', 'service'] },
     { name: 'Parts Orders', href: '/parts-orders', icon: ShoppingCart, roles: ['admin', 'manager', 'service'] },
+    { name: 'Accounting', href: '/accounting', icon: DollarSign, roles: ['admin', 'manager', 'finance'] },
+    { name: 'Compliance', href: '/compliance', icon: Shield, roles: ['admin', 'manager', 'finance'] },
     { name: 'Analytics', href: '/analytics', icon: TrendingUp, roles: ['admin', 'manager'] },
     { name: 'Users', href: '/users', icon: UserCircle, roles: ['admin', 'manager'] },
     { name: 'Profile', href: '/profile', icon: Settings, roles: ['admin', 'manager', 'salesperson', 'finance', 'service'] },
