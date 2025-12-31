@@ -906,6 +906,283 @@
         }
       }
     },
+    "/api/repair-orders/{id}": {
+      "get": {
+        "summary": "Get a repair order by ID",
+        "description": "Retrieve a single repair order by its ID",
+        "tags": [
+          "Repair Orders"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Repair order retrieved successfully"
+          },
+          "404": {
+            "description": "Repair order not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a repair order",
+        "description": "Update an existing repair order by ID",
+        "tags": [
+          "Repair Orders"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "issue_reported": {
+                    "type": "string"
+                  },
+                  "diagnosis_summary": {
+                    "type": "string"
+                  },
+                  "repair_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "parts_replaced": {
+                    "type": "string"
+                  },
+                  "labor_hours": {
+                    "type": "integer"
+                  },
+                  "repair_cost": {
+                    "type": "integer"
+                  },
+                  "warranty_details": {
+                    "type": "string"
+                  },
+                  "technician_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "repair_status": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Repair order updated successfully"
+          },
+          "404": {
+            "description": "Repair order not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a repair order",
+        "description": "Delete a repair order by ID",
+        "tags": [
+          "Repair Orders"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Repair order deleted successfully"
+          },
+          "404": {
+            "description": "Repair order not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/repair-orders": {
+      "get": {
+        "summary": "Get all repair orders",
+        "description": "Retrieve a list of all repair orders with pagination and filtering",
+        "tags": [
+          "Repair Orders"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by repair status (Pending, In Progress, Completed, Cancelled)"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of repair orders retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new repair order",
+        "description": "Create a new repair order record",
+        "tags": [
+          "Repair Orders"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "repair_order_id",
+                  "customer_id",
+                  "vehicle_id",
+                  "issue_reported",
+                  "repair_date",
+                  "repair_cost",
+                  "repair_status"
+                ],
+                "properties": {
+                  "repair_order_id": {
+                    "type": "string"
+                  },
+                  "customer_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "vehicle_id": {
+                    "type": "string"
+                  },
+                  "issue_reported": {
+                    "type": "string"
+                  },
+                  "diagnosis_summary": {
+                    "type": "string"
+                  },
+                  "repair_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "parts_replaced": {
+                    "type": "string"
+                  },
+                  "labor_hours": {
+                    "type": "integer"
+                  },
+                  "repair_cost": {
+                    "type": "integer"
+                  },
+                  "warranty_details": {
+                    "type": "string"
+                  },
+                  "technician_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "repair_status": {
+                    "type": "string",
+                    "enum": [
+                      "Pending",
+                      "In Progress",
+                      "Completed",
+                      "Cancelled"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Repair order created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/sales/{id}": {
       "get": {
         "summary": "Get sale by ID",
@@ -963,6 +1240,288 @@
             "bearerAuth": []
           }
         ]
+      }
+    },
+    "/api/service-history/{id}": {
+      "get": {
+        "summary": "Get a service history record by ID",
+        "description": "Retrieve a single service history record by its ID",
+        "tags": [
+          "Service History"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service history record retrieved successfully"
+          },
+          "404": {
+            "description": "Service history record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a service history record",
+        "description": "Update an existing service history record by ID",
+        "tags": [
+          "Service History"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "service_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "service_type": {
+                    "type": "string"
+                  },
+                  "service_details": {
+                    "type": "string"
+                  },
+                  "technician_name": {
+                    "type": "string"
+                  },
+                  "service_center": {
+                    "type": "string"
+                  },
+                  "total_cost": {
+                    "type": "integer"
+                  },
+                  "mileage_at_service": {
+                    "type": "integer"
+                  },
+                  "warranty_claim": {
+                    "type": "boolean"
+                  },
+                  "service_rating": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service history record updated successfully"
+          },
+          "404": {
+            "description": "Service history record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a service history record",
+        "description": "Delete a service history record by ID",
+        "tags": [
+          "Service History"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service history record deleted successfully"
+          },
+          "404": {
+            "description": "Service history record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/service-history": {
+      "get": {
+        "summary": "Get all service history records",
+        "description": "Retrieve a list of all service history records with pagination and filtering",
+        "tags": [
+          "Service History"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "vehicle_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by vehicle ID"
+          },
+          {
+            "in": "query",
+            "name": "customer_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Filter by customer ID"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service history records retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new service history record",
+        "description": "Create a new service history entry",
+        "tags": [
+          "Service History"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "service_history_id",
+                  "vehicle_id",
+                  "customer_id",
+                  "service_date",
+                  "service_type",
+                  "service_center",
+                  "total_cost",
+                  "mileage_at_service",
+                  "warranty_claim"
+                ],
+                "properties": {
+                  "service_history_id": {
+                    "type": "string"
+                  },
+                  "vehicle_id": {
+                    "type": "string"
+                  },
+                  "customer_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "service_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "service_type": {
+                    "type": "string"
+                  },
+                  "service_details": {
+                    "type": "string"
+                  },
+                  "technician_name": {
+                    "type": "string"
+                  },
+                  "service_center": {
+                    "type": "string"
+                  },
+                  "total_cost": {
+                    "type": "integer"
+                  },
+                  "mileage_at_service": {
+                    "type": "integer"
+                  },
+                  "warranty_claim": {
+                    "type": "boolean"
+                  },
+                  "service_rating": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Service history record created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
     },
     "/api/service-scheduling/{id}": {

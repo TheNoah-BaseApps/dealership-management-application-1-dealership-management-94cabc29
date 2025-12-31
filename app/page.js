@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench } from 'lucide-react';
+import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench, ClipboardList } from 'lucide-react';
 
 export default function HomePage() {
   const router = useRouter();
@@ -87,6 +87,20 @@ export default function HomePage() {
             <h3 className="text-xl font-semibold mb-2">Service Scheduling</h3>
             <p className="text-gray-600">
               Schedule and manage service appointments. Assign technicians and track service completion.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <Wrench className="h-12 w-12 text-orange-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Repair Orders</h3>
+            <p className="text-gray-600">
+              Track vehicle repairs from diagnosis to completion. Manage parts, labor, and warranty claims.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <ClipboardList className="h-12 w-12 text-teal-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Service History</h3>
+            <p className="text-gray-600">
+              Complete service records and maintenance history. Track mileage, costs, and service ratings.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
