@@ -162,6 +162,249 @@
         }
       }
     },
+    "/api/customer-engagements/{id}": {
+      "get": {
+        "summary": "Get a specific customer engagement",
+        "description": "Retrieve details of a specific customer engagement by ID",
+        "tags": [
+          "Customer Engagements"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Customer engagement ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved customer engagement"
+          },
+          "404": {
+            "description": "Customer engagement not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a customer engagement",
+        "description": "Update an existing customer engagement",
+        "tags": [
+          "Customer Engagements"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Customer engagement updated successfully"
+          },
+          "404": {
+            "description": "Customer engagement not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a customer engagement",
+        "description": "Delete a customer engagement by ID",
+        "tags": [
+          "Customer Engagements"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer engagement deleted successfully"
+          },
+          "404": {
+            "description": "Customer engagement not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/customer-engagements": {
+      "get": {
+        "summary": "Get all customer engagements",
+        "description": "Retrieve a list of all customer engagements with optional filtering",
+        "tags": [
+          "Customer Engagements"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customer_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by customer ID"
+          },
+          {
+            "in": "query",
+            "name": "engagement_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by engagement type"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Maximum number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved customer engagements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new customer engagement",
+        "description": "Create a new customer engagement record",
+        "tags": [
+          "Customer Engagements"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "engagement_id",
+                  "customer_id",
+                  "engagement_type",
+                  "engagement_date",
+                  "communication_method"
+                ],
+                "properties": {
+                  "engagement_id": {
+                    "type": "string"
+                  },
+                  "customer_id": {
+                    "type": "string"
+                  },
+                  "engagement_type": {
+                    "type": "string"
+                  },
+                  "engagement_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "campaign_id": {
+                    "type": "string"
+                  },
+                  "response_received": {
+                    "type": "boolean"
+                  },
+                  "reward_points": {
+                    "type": "integer"
+                  },
+                  "communication_method": {
+                    "type": "string"
+                  },
+                  "engagement_outcome": {
+                    "type": "string"
+                  },
+                  "follow_up_needed": {
+                    "type": "boolean"
+                  },
+                  "next_engagement_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Customer engagement created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/customers/{id}": {
       "get": {
         "summary": "Get customer by ID",
@@ -470,6 +713,266 @@
             "bearerAuth": []
           }
         ]
+      }
+    },
+    "/api/stock-inventory/{id}": {
+      "get": {
+        "summary": "Get a specific stock inventory item",
+        "description": "Retrieve details of a specific vehicle in stock by ID",
+        "tags": [
+          "Stock Inventory"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Stock inventory item ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved stock inventory item"
+          },
+          "404": {
+            "description": "Stock inventory item not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a stock inventory item",
+        "description": "Update an existing vehicle in stock",
+        "tags": [
+          "Stock Inventory"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Stock inventory item updated successfully"
+          },
+          "404": {
+            "description": "Stock inventory item not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a stock inventory item",
+        "description": "Remove a vehicle from stock inventory by ID",
+        "tags": [
+          "Stock Inventory"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stock inventory item deleted successfully"
+          },
+          "404": {
+            "description": "Stock inventory item not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/stock-inventory": {
+      "get": {
+        "summary": "Get all stock inventory",
+        "description": "Retrieve a list of all vehicle stock inventory with optional filtering",
+        "tags": [
+          "Stock Inventory"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "stock_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by stock status"
+          },
+          {
+            "in": "query",
+            "name": "make",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by vehicle make"
+          },
+          {
+            "in": "query",
+            "name": "model",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by vehicle model"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Maximum number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved stock inventory",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new stock inventory item",
+        "description": "Add a new vehicle to stock inventory",
+        "tags": [
+          "Stock Inventory"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "vehicle_id",
+                  "vin_number",
+                  "make",
+                  "model",
+                  "year",
+                  "purchase_date",
+                  "stock_status",
+                  "purchase_price",
+                  "location",
+                  "mileage",
+                  "color"
+                ],
+                "properties": {
+                  "vehicle_id": {
+                    "type": "string"
+                  },
+                  "vin_number": {
+                    "type": "string"
+                  },
+                  "make": {
+                    "type": "string"
+                  },
+                  "model": {
+                    "type": "string"
+                  },
+                  "year": {
+                    "type": "integer"
+                  },
+                  "purchase_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "stock_status": {
+                    "type": "string"
+                  },
+                  "purchase_price": {
+                    "type": "integer"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "mileage": {
+                    "type": "integer"
+                  },
+                  "color": {
+                    "type": "string"
+                  },
+                  "last_inspection_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Stock inventory item created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
     },
     "/api/trade-ins/{id}": {
