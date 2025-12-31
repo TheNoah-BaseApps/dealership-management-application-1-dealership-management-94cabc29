@@ -656,6 +656,256 @@
         ]
       }
     },
+    "/api/order-management/{id}": {
+      "get": {
+        "summary": "Get order by ID",
+        "description": "Retrieve a specific order by its ID",
+        "tags": [
+          "Order Management"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order retrieved successfully"
+          },
+          "404": {
+            "description": "Order not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update order",
+        "description": "Update an existing order",
+        "tags": [
+          "Order Management"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order updated successfully"
+          },
+          "404": {
+            "description": "Order not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete order",
+        "description": "Delete an order by ID",
+        "tags": [
+          "Order Management"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order deleted successfully"
+          },
+          "404": {
+            "description": "Order not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/order-management": {
+      "get": {
+        "summary": "Get all orders",
+        "description": "Retrieve a list of all vehicle orders with pagination and filtering",
+        "tags": [
+          "Order Management"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Items per page"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by order status"
+          },
+          {
+            "in": "query",
+            "name": "payment_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by payment status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of orders retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new order",
+        "description": "Create a new vehicle order",
+        "tags": [
+          "Order Management"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "order_id",
+                  "customer_id",
+                  "vehicle_id",
+                  "order_date",
+                  "order_status",
+                  "payment_status",
+                  "order_value"
+                ],
+                "properties": {
+                  "order_id": {
+                    "type": "string"
+                  },
+                  "customer_id": {
+                    "type": "string"
+                  },
+                  "vehicle_id": {
+                    "type": "string"
+                  },
+                  "order_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "expected_delivery_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "order_status": {
+                    "type": "string"
+                  },
+                  "salesperson_id": {
+                    "type": "string"
+                  },
+                  "payment_status": {
+                    "type": "string"
+                  },
+                  "order_value": {
+                    "type": "number"
+                  },
+                  "deposit_amount": {
+                    "type": "number"
+                  },
+                  "trade_in_vehicle_id": {
+                    "type": "string"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/sales/{id}": {
       "get": {
         "summary": "Get sale by ID",
@@ -713,6 +963,250 @@
             "bearerAuth": []
           }
         ]
+      }
+    },
+    "/api/service-scheduling/{id}": {
+      "get": {
+        "summary": "Get service appointment by ID",
+        "description": "Retrieve a specific service appointment by its ID",
+        "tags": [
+          "Service Scheduling"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Service appointment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service appointment retrieved successfully"
+          },
+          "404": {
+            "description": "Service appointment not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update service appointment",
+        "description": "Update an existing service appointment",
+        "tags": [
+          "Service Scheduling"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Service appointment ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service appointment updated successfully"
+          },
+          "404": {
+            "description": "Service appointment not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete service appointment",
+        "description": "Delete a service appointment by ID",
+        "tags": [
+          "Service Scheduling"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Service appointment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service appointment deleted successfully"
+          },
+          "404": {
+            "description": "Service appointment not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/service-scheduling": {
+      "get": {
+        "summary": "Get all service appointments",
+        "description": "Retrieve a list of all service appointments with pagination and filtering",
+        "tags": [
+          "Service Scheduling"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Items per page"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by confirmation status"
+          },
+          {
+            "in": "query",
+            "name": "service_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by service type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of service appointments retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new service appointment",
+        "description": "Schedule a new service appointment",
+        "tags": [
+          "Service Scheduling"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "schedule_id",
+                  "customer_id",
+                  "vehicle_id",
+                  "appointment_date",
+                  "service_type",
+                  "preferred_time_slot",
+                  "booking_channel",
+                  "confirmation_status"
+                ],
+                "properties": {
+                  "schedule_id": {
+                    "type": "string"
+                  },
+                  "customer_id": {
+                    "type": "string"
+                  },
+                  "vehicle_id": {
+                    "type": "string"
+                  },
+                  "appointment_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "service_type": {
+                    "type": "string"
+                  },
+                  "preferred_time_slot": {
+                    "type": "string"
+                  },
+                  "technician_id": {
+                    "type": "string"
+                  },
+                  "booking_channel": {
+                    "type": "string"
+                  },
+                  "confirmation_status": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Service appointment created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
     },
     "/api/stock-inventory/{id}": {

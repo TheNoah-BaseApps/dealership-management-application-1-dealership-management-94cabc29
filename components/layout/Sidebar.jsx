@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Home, Users, DollarSign, Car, TrendingUp, Settings, UserCircle, ClipboardList, MessageSquare, Package } from 'lucide-react';
+import { Home, Users, DollarSign, Car, TrendingUp, Settings, UserCircle, ClipboardList, MessageSquare, Package, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Sidebar({ isOpen, currentPath, userRole }) {
@@ -13,6 +13,8 @@ export default function Sidebar({ isOpen, currentPath, userRole }) {
     { name: 'Vehicles', href: '/vehicles', icon: Car, roles: ['admin', 'manager', 'salesperson'] },
     { name: 'Customer Engagements', href: '/customer-engagements', icon: MessageSquare, roles: ['admin', 'manager', 'salesperson'] },
     { name: 'Stock Inventory', href: '/stock-inventory', icon: Package, roles: ['admin', 'manager', 'salesperson'] },
+    { name: 'Order Management', href: '/order-management', icon: Package, roles: ['admin', 'manager', 'salesperson', 'finance'] },
+    { name: 'Service Scheduling', href: '/service-scheduling', icon: Calendar, roles: ['admin', 'manager', 'service'] },
     { name: 'Analytics', href: '/analytics', icon: TrendingUp, roles: ['admin', 'manager'] },
     { name: 'Users', href: '/users', icon: UserCircle, roles: ['admin', 'manager'] },
     { name: 'Profile', href: '/profile', icon: Settings, roles: ['admin', 'manager', 'salesperson', 'finance', 'service'] },
