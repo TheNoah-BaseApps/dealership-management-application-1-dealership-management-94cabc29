@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench, ClipboardList, Package, DollarSign } from 'lucide-react';
+import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench, ClipboardList, Package, DollarSign, MessageSquare } from 'lucide-react';
 
 export default function HomePage() {
   const router = useRouter();
@@ -129,6 +129,20 @@ export default function HomePage() {
             <h3 className="text-xl font-semibold mb-2">Compliance</h3>
             <p className="text-gray-600">
               Manage regulatory compliance, audits, and documentation. Track deadlines and responsible parties.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <ClipboardList className="h-12 w-12 text-purple-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Audits</h3>
+            <p className="text-gray-600">
+              Track dealership audits, compliance issues, and corrective actions. Manage audit schedules and reports.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <MessageSquare className="h-12 w-12 text-pink-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Communication</h3>
+            <p className="text-gray-600">
+              Manage customer communications and follow-ups. Track response status and communication channels.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">

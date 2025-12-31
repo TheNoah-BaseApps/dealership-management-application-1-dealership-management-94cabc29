@@ -305,6 +305,267 @@
         ]
       }
     },
+    "/api/audits/{id}": {
+      "get": {
+        "summary": "Get audit by ID",
+        "description": "Retrieve a specific audit by its ID",
+        "tags": [
+          "Audits"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Audit ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "404": {
+            "description": "Audit not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update audit",
+        "description": "Update an existing audit by ID",
+        "tags": [
+          "Audits"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Audit ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "audit_type": {
+                    "type": "string"
+                  },
+                  "audit_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "auditor_name": {
+                    "type": "string"
+                  },
+                  "area_audited": {
+                    "type": "string"
+                  },
+                  "audit_status": {
+                    "type": "string"
+                  },
+                  "non_compliance_issues": {
+                    "type": "string"
+                  },
+                  "corrective_actions": {
+                    "type": "string"
+                  },
+                  "report_submission_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "follow_up_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "audit_summary": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Audit updated successfully"
+          },
+          "404": {
+            "description": "Audit not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete audit",
+        "description": "Delete an audit by ID",
+        "tags": [
+          "Audits"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Audit ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audit deleted successfully"
+          },
+          "404": {
+            "description": "Audit not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/audits": {
+      "get": {
+        "summary": "Get all audits",
+        "description": "Retrieve a list of all dealership audits with pagination and filtering",
+        "tags": [
+          "Audits"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number for pagination"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "audit_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by audit status"
+          },
+          {
+            "in": "query",
+            "name": "audit_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by audit type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of audits"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new audit",
+        "description": "Create a new dealership audit record",
+        "tags": [
+          "Audits"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "audit_id",
+                  "audit_type",
+                  "audit_date",
+                  "auditor_name",
+                  "area_audited",
+                  "audit_status"
+                ],
+                "properties": {
+                  "audit_id": {
+                    "type": "string"
+                  },
+                  "audit_type": {
+                    "type": "string"
+                  },
+                  "audit_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "auditor_name": {
+                    "type": "string"
+                  },
+                  "area_audited": {
+                    "type": "string"
+                  },
+                  "audit_status": {
+                    "type": "string"
+                  },
+                  "non_compliance_issues": {
+                    "type": "string"
+                  },
+                  "corrective_actions": {
+                    "type": "string"
+                  },
+                  "report_submission_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "follow_up_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "audit_summary": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Audit created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/auth/login": {
       "post": {
         "summary": "Login user",
@@ -391,6 +652,256 @@
           },
           "400": {
             "description": "Invalid input or email already exists"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/communication/{id}": {
+      "get": {
+        "summary": "Get communication record by ID",
+        "description": "Retrieve a specific communication record by its ID",
+        "tags": [
+          "Communication"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Communication ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "404": {
+            "description": "Communication record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update communication record",
+        "description": "Update an existing communication record by ID",
+        "tags": [
+          "Communication"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Communication ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "communication_type": {
+                    "type": "string"
+                  },
+                  "subject": {
+                    "type": "string"
+                  },
+                  "message_content": {
+                    "type": "string"
+                  },
+                  "response_status": {
+                    "type": "string"
+                  },
+                  "follow_up_required": {
+                    "type": "boolean"
+                  },
+                  "follow_up_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Communication record updated successfully"
+          },
+          "404": {
+            "description": "Communication record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete communication record",
+        "description": "Delete a communication record by ID",
+        "tags": [
+          "Communication"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Communication ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Communication record deleted successfully"
+          },
+          "404": {
+            "description": "Communication record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/communication": {
+      "get": {
+        "summary": "Get all communication records",
+        "description": "Retrieve a list of all dealership communication records with pagination and filtering",
+        "tags": [
+          "Communication"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number for pagination"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "in": "query",
+            "name": "customer_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by customer ID"
+          },
+          {
+            "in": "query",
+            "name": "response_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by response status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of communication records"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new communication record",
+        "description": "Create a new dealership communication record",
+        "tags": [
+          "Communication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "communication_id",
+                  "customer_id",
+                  "communication_date",
+                  "communication_type",
+                  "subject",
+                  "message_content",
+                  "sent_by",
+                  "response_status",
+                  "follow_up_required",
+                  "channel_used"
+                ],
+                "properties": {
+                  "communication_id": {
+                    "type": "string"
+                  },
+                  "customer_id": {
+                    "type": "string"
+                  },
+                  "communication_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "communication_type": {
+                    "type": "string"
+                  },
+                  "subject": {
+                    "type": "string"
+                  },
+                  "message_content": {
+                    "type": "string"
+                  },
+                  "sent_by": {
+                    "type": "string"
+                  },
+                  "response_status": {
+                    "type": "string"
+                  },
+                  "follow_up_required": {
+                    "type": "boolean"
+                  },
+                  "follow_up_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "channel_used": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Communication record created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
           },
           "500": {
             "description": "Server error"

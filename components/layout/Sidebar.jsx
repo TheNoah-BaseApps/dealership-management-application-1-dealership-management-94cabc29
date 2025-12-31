@@ -21,6 +21,8 @@ export default function Sidebar({ isOpen, currentPath, userRole }) {
     { name: 'Parts Orders', href: '/parts-orders', icon: ShoppingCart, roles: ['admin', 'manager', 'service'] },
     { name: 'Accounting', href: '/accounting', icon: DollarSign, roles: ['admin', 'manager', 'finance'] },
     { name: 'Compliance', href: '/compliance', icon: Shield, roles: ['admin', 'manager', 'finance'] },
+    { name: 'Audits', href: '/audits', icon: ClipboardList, roles: ['admin', 'manager', 'finance'] },
+    { name: 'Communication', href: '/communication', icon: MessageSquare, roles: ['admin', 'manager', 'finance'] },
     { name: 'Analytics', href: '/analytics', icon: TrendingUp, roles: ['admin', 'manager'] },
     { name: 'Users', href: '/users', icon: UserCircle, roles: ['admin', 'manager'] },
     { name: 'Profile', href: '/profile', icon: Settings, roles: ['admin', 'manager', 'salesperson', 'finance', 'service'] },
