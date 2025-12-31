@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench, ClipboardList } from 'lucide-react';
+import { Car, Users, TrendingUp, Shield, ShoppingCart, Wrench, ClipboardList, Package } from 'lucide-react';
 
 export default function HomePage() {
   const router = useRouter();
@@ -101,6 +101,20 @@ export default function HomePage() {
             <h3 className="text-xl font-semibold mb-2">Service History</h3>
             <p className="text-gray-600">
               Complete service records and maintenance history. Track mileage, costs, and service ratings.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <Package className="h-12 w-12 text-indigo-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Parts Inventory</h3>
+            <p className="text-gray-600">
+              Track parts stock levels, reorder points, and supplier information. Manage warehouse locations.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <ShoppingCart className="h-12 w-12 text-cyan-600 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Parts Orders</h3>
+            <p className="text-gray-600">
+              Manage parts procurement and orders. Track delivery status, payments, and supplier relationships.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
